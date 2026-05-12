@@ -34,11 +34,18 @@ public class SuikaGame : MonoBehaviour
     float lastDropTime = -10f;
     public float LastDropTime => lastDropTime;
 
+    [Header("Preview Timing")]
+    [Tooltip("드롭한 과일이 이 Y값 아래로 내려가야 다음 미리보기가 나타남")]
+    public float previewReadyY = 3.5f;
+    Fruit lastDropped;
+
     public void TriggerGameOver()
     {
-        if (gameOver) return;
+        if (gameOver)
+            return;
         gameOver = true;
-        if (previewObj != null) previewObj.SetActive(false);
+        if (previewObj != null)
+            previewObj.SetActive(false);
     }
 
     GUIStyle scoreStyle,
@@ -68,25 +75,47 @@ public class SuikaGame : MonoBehaviour
         if (gameOver)
             return;
 
+        // 다음 미리보기는 마지막 드롭 과일이 충분히 내려가야 등장
+        if (previewObj == null && IsReadyForNextPreview())
+        {
+            ShowPreview();
+        }
+
         float mx = Camera.main.ScreenToWorldPoint(Input.mousePosition).x;
         mx = Mathf.Clamp(mx, minX, maxX);
         if (previewObj != null)
             previewObj.transform.position = new Vector3(mx, spawnY, 0);
 
-        if (Input.GetMouseButtonDown(0) && Time.time - lastDropTime >= dropCooldown)
+        if (
+            previewObj != null
+            && Input.GetMouseButtonDown(0)
+            && Time.time - lastDropTime >= dropCooldown
+        )
         {
             lastDropTime = Time.time;
             DropFruit(mx);
         }
+    }
 
+    bool IsReadyForNextPreview()
+    {
+        if (lastDropped == null)
+            return true; // 파괴되었거나 처음 시작
+        return lastDropped.transform.position.y < previewReadyY;
     }
 
     void DropFruit(float x)
     {
-        SpawnFruit(new Vector3(x, spawnY, 0), currentLevel);
+        lastDropped = SpawnFruit(new Vector3(x, spawnY, 0), currentLevel);
         currentLevel = nextLevel;
         nextLevel = Random.Range(0, spawnableMaxLevel + 1);
-        ShowPreview();
+
+        // 미리보기 즉시 제거 — IsReadyForNextPreview()가 통과해야 새로 표시
+        if (previewObj != null)
+        {
+            Destroy(previewObj);
+            previewObj = null;
+        }
     }
 
     void ShowPreview()
@@ -149,11 +178,7 @@ public class SuikaGame : MonoBehaviour
         }
 
         GUI.Label(new Rect(0, 10, Screen.width, 50), "Score: " + score, scoreStyle);
-        GUI.Label(
-            new Rect(0, 10, Screen.width - 20, 50),
-            "Next: lv" + (nextLevel + 1),
-            smallStyle
-        );
+        GUI.Label(new Rect(0, 10, Screen.width - 20, 50), "Next: lv" + (nextLevel + 1), smallStyle);
 
         if (gameOver)
         {
