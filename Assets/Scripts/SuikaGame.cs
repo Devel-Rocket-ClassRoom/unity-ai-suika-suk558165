@@ -149,6 +149,65 @@ public class SuikaGame : MonoBehaviour
             AudioSource.PlayClipAtPoint(data.mergeSfx, pos);
     }
 
+    void DrawNextFruitIcon()
+    {
+        if (fruits == null || fruits.Length == 0)
+            return;
+        var data = fruits[nextLevel];
+        if (data == null || data.sprite == null)
+            return;
+
+        // 우상단 카드 영역
+        float cardW = 110f,
+            cardH = 130f;
+        float cardX = Screen.width - cardW - 20f;
+        float cardY = 20f;
+        var cardRect = new Rect(cardX, cardY, cardW, cardH);
+
+        // 카드 배경 (반투명 흰색)
+        var prevColor = GUI.color;
+        GUI.color = new Color(1f, 1f, 1f, 0.85f);
+        GUI.Box(cardRect, GUIContent.none);
+        GUI.color = prevColor;
+
+        // "NEXT" 라벨
+        var labelStyle = new GUIStyle(GUI.skin.label)
+        {
+            fontSize = 18,
+            alignment = TextAnchor.UpperCenter,
+            fontStyle = FontStyle.Bold,
+        };
+        labelStyle.normal.textColor = new Color(0.4f, 0.3f, 0.2f);
+        GUI.Label(new Rect(cardX, cardY + 6f, cardW, 24f), "NEXT", labelStyle);
+
+        // 아이콘 그리기
+        var sprite = data.sprite;
+        var tex = sprite.texture;
+        // sprite의 textureRect (스프라이트가 텍스처의 일부일 수도 있음)
+        var rect = sprite.textureRect;
+        float texW = tex.width,
+            texH = tex.height;
+
+        // UV 영역 계산
+        var uv = new Rect(
+            rect.x / texW,
+            rect.y / texH,
+            rect.width / texW,
+            rect.height / texH
+        );
+
+        // 아이콘 영역 (카드 안쪽)
+        float iconSize = 80f;
+        float iconX = cardX + (cardW - iconSize) * 0.5f;
+        float iconY = cardY + 32f;
+        var iconRect = new Rect(iconX, iconY, iconSize, iconSize);
+
+        // 스프라이트 비율 유지 (정사각 가정)
+        GUI.color = data.tint;
+        GUI.DrawTextureWithTexCoords(iconRect, tex, uv);
+        GUI.color = prevColor;
+    }
+
     void OnGUI()
     {
         if (scoreStyle == null)
@@ -175,7 +234,7 @@ public class SuikaGame : MonoBehaviour
         }
 
         GUI.Label(new Rect(0, 10, Screen.width, 50), "Score: " + score, scoreStyle);
-        GUI.Label(new Rect(0, 10, Screen.width - 20, 50), "Next: lv" + (nextLevel + 1), smallStyle);
+        DrawNextFruitIcon();
 
         if (gameOver)
         {
