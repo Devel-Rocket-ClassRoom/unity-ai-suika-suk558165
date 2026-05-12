@@ -1,0 +1,10 @@
+{
+  "mcpServers": {
+    "unity-mcp": {
+      "type": "stdio",
+      "command": "unity-mcp-server",
+      "args": [],
+      "description": "Unity Editor MCP — provided by Unity's built-in MCP integration. Connect via Unity Editor: Project Settings > AI > Unity MCP > Approve."
+    }
+  }
+}

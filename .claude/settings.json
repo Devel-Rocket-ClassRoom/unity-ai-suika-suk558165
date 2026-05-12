@@ -1,0 +1,32 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(dotnet csharpier *)",
+      "Bash(dotnet tool *)",
+      "Bash(git status)",
+      "Bash(git diff *)",
+      "Bash(git log *)",
+      "Bash(git add *)",
+      "Bash(ls *)",
+      "Read",
+      "Edit",
+      "Write",
+      "Glob",
+      "Grep",
+      "mcp__unity-mcp__*"
+    ]
+  },
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Edit|Write|MultiEdit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "if echo \"$CLAUDE_TOOL_INPUT\" | grep -qE '\\.cs\"'; then FILE=$(echo \"$CLAUDE_TOOL_INPUT\" | grep -oE '\"file_path\":\\s*\"[^\"]+\\.cs\"' | sed 's/.*\"\\(.*\\)\"/\\1/'); if [ -n \"$FILE\" ] && [ -f \"$FILE\" ]; then dotnet csharpier \"$FILE\" 2>/dev/null || echo \"CSharpier not installed. Run: dotnet tool install -g csharpier\"; fi; fi"
+          }
+        ]
+      }
+    ]
+  }
+}
