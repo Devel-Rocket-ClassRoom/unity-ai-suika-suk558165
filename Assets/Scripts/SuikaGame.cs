@@ -34,6 +34,45 @@ public class SuikaGame : MonoBehaviour
 
     const string HighScoreKey = "HighScore";
 
+    [Header("UI - Score / Best (위에서부터 px)")]
+    [Tooltip("Score 텍스트의 y 위치 (위에서 px)")]
+    public float scoreY = 10f;
+
+    [Tooltip("Score 폰트 크기")]
+    public int scoreFontSize = 32;
+
+    [Tooltip("Best 텍스트의 y 위치 (위에서 px)")]
+    public float bestY = 50f;
+
+    [Tooltip("Best 폰트 크기")]
+    public int bestFontSize = 20;
+
+    [Header("UI - Next 라벨")]
+    [Tooltip("Next 텍스트의 우측 여백 (px)")]
+    public float nextRightMargin = 20f;
+
+    [Tooltip("Next 텍스트의 y 위치 (위에서 px)")]
+    public float nextY = 10f;
+
+    [Tooltip("Next 폰트 크기")]
+    public int nextFontSize = 20;
+
+    [Header("UI - Game Over (화면 중앙 기준 오프셋, px)")]
+    [Tooltip("GAME OVER 글자 y 오프셋 (중앙 기준)")]
+    public float gameOverTitleOffsetY = -60f;
+
+    [Tooltip("최종 점수/베스트 y 오프셋")]
+    public float gameOverResultOffsetY = 10f;
+
+    [Tooltip("Restart 버튼 y 오프셋")]
+    public float restartButtonOffsetY = 60f;
+
+    [Tooltip("Restart 버튼 크기")]
+    public Vector2 restartButtonSize = new Vector2(160f, 50f);
+
+    [Tooltip("'신기록' 메시지 y 오프셋")]
+    public float newRecordOffsetY = -100f;
+
     GameObject previewObj;
     float lastDropTime = -10f;
     public float LastDropTime => lastDropTime;
@@ -57,10 +96,6 @@ public class SuikaGame : MonoBehaviour
             PlayerPrefs.Save();
         }
     }
-
-    GUIStyle scoreStyle,
-        overStyle,
-        smallStyle;
 
     void Awake()
     {
@@ -165,72 +200,89 @@ public class SuikaGame : MonoBehaviour
 
     void OnGUI()
     {
-        if (scoreStyle == null)
+        // 매 프레임 새 GUIStyle 만들어 폰트 크기 변경 즉시 반영
+        var scoreS = new GUIStyle(GUI.skin.label)
         {
-            scoreStyle = new GUIStyle(GUI.skin.label)
-            {
-                fontSize = 32,
-                alignment = TextAnchor.UpperCenter,
-            };
-            scoreStyle.normal.textColor = Color.black;
-            smallStyle = new GUIStyle(GUI.skin.label)
-            {
-                fontSize = 20,
-                alignment = TextAnchor.UpperRight,
-            };
-            smallStyle.normal.textColor = Color.black;
-            overStyle = new GUIStyle(GUI.skin.label)
-            {
-                fontSize = 72,
-                alignment = TextAnchor.MiddleCenter,
-                fontStyle = FontStyle.Bold,
-            };
-            overStyle.normal.textColor = Color.red;
-        }
+            fontSize = scoreFontSize,
+            alignment = TextAnchor.UpperCenter,
+        };
+        scoreS.normal.textColor = Color.black;
 
-        GUI.Label(new Rect(0, 10, Screen.width, 50), "Score: " + score, scoreStyle);
+        var bestS = new GUIStyle(GUI.skin.label)
+        {
+            fontSize = bestFontSize,
+            alignment = TextAnchor.UpperCenter,
+        };
+        bestS.normal.textColor = new Color(0.4f, 0.3f, 0.2f);
 
-        var bestStyle = new GUIStyle(smallStyle) { alignment = TextAnchor.UpperCenter };
-        bestStyle.normal.textColor = new Color(0.4f, 0.3f, 0.2f);
-        GUI.Label(new Rect(0, 50, Screen.width, 30), "Best: " + highScore, bestStyle);
+        var nextS = new GUIStyle(GUI.skin.label)
+        {
+            fontSize = nextFontSize,
+            alignment = TextAnchor.UpperRight,
+        };
+        nextS.normal.textColor = Color.black;
 
-        GUI.Label(new Rect(0, 10, Screen.width - 20, 50), "Next: lv" + (nextLevel + 1), smallStyle);
+        var overS = new GUIStyle(GUI.skin.label)
+        {
+            fontSize = 72,
+            alignment = TextAnchor.MiddleCenter,
+            fontStyle = FontStyle.Bold,
+        };
+        overS.normal.textColor = Color.red;
+
+        GUI.Label(new Rect(0, scoreY, Screen.width, scoreFontSize + 18), "Score: " + score, scoreS);
+        GUI.Label(new Rect(0, bestY, Screen.width, bestFontSize + 10), "Best: " + highScore, bestS);
+        GUI.Label(
+            new Rect(0, nextY, Screen.width - nextRightMargin, nextFontSize + 10),
+            "Next: lv" + (nextLevel + 1),
+            nextS
+        );
 
         if (gameOver)
         {
+            float cx = Screen.width / 2f;
+            float cy = Screen.height / 2f;
+
             GUI.Box(new Rect(0, 0, Screen.width, Screen.height), GUIContent.none);
             GUI.Label(
-                new Rect(0, Screen.height / 2 - 60, Screen.width, 120),
+                new Rect(0, cy + gameOverTitleOffsetY, Screen.width, 120),
                 "GAME OVER",
-                overStyle
+                overS
             );
-            // 최종 점수 + 최고 점수
-            var resultStyle = new GUIStyle(scoreStyle);
-            resultStyle.normal.textColor = Color.white;
-            resultStyle.fontSize = 36;
+
+            var resultS = new GUIStyle(scoreS)
+            {
+                fontSize = 36,
+            };
+            resultS.normal.textColor = Color.white;
             GUI.Label(
-                new Rect(0, Screen.height / 2 + 10, Screen.width, 40),
+                new Rect(0, cy + gameOverResultOffsetY, Screen.width, 40),
                 "Score: " + score + "   Best: " + highScore,
-                resultStyle
+                resultS
             );
+
             if (isNewRecord)
             {
-                var recordStyle = new GUIStyle(scoreStyle);
-                recordStyle.fontSize = 28;
-                recordStyle.fontStyle = FontStyle.Bold;
-                recordStyle.normal.textColor = new Color(1f, 0.85f, 0.2f);
+                var recordS = new GUIStyle(scoreS)
+                {
+                    fontSize = 28,
+                    fontStyle = FontStyle.Bold,
+                };
+                recordS.normal.textColor = new Color(1f, 0.85f, 0.2f);
                 GUI.Label(
-                    new Rect(0, Screen.height / 2 - 100, Screen.width, 30),
+                    new Rect(0, cy + newRecordOffsetY, Screen.width, 30),
                     "★ 신기록! ★",
-                    recordStyle
+                    recordS
                 );
             }
-            if (
-                GUI.Button(
-                    new Rect(Screen.width / 2 - 80, Screen.height / 2 + 40, 160, 50),
-                    "Restart"
-                )
-            )
+
+            var btnRect = new Rect(
+                cx - restartButtonSize.x / 2f,
+                cy + restartButtonOffsetY,
+                restartButtonSize.x,
+                restartButtonSize.y
+            );
+            if (GUI.Button(btnRect, "Restart"))
             {
                 UnityEngine.SceneManagement.SceneManager.LoadScene(
                     UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex
