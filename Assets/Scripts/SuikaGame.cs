@@ -24,30 +24,23 @@ public class SuikaGame : MonoBehaviour
     [Tooltip("드롭에서 나올 수 있는 최대 레벨 (이 이상은 머지로만 등장)")]
     public int spawnableMaxLevel = 4;
 
+    // === 상태 ===
     public int maxLevel => fruits.Length - 1;
     public int currentLevel;
     public int nextLevel;
     public int score;
+    public int highScore;
+    public bool isNewRecord;
     public bool gameOver;
+    public bool paused;
+
+    const string HighScoreKey = "HighScore";
 
     GameObject previewObj;
     float lastDropTime = -10f;
     public float LastDropTime => lastDropTime;
 
     Fruit lastDropped;
-
-    public void TriggerGameOver()
-    {
-        if (gameOver)
-            return;
-        gameOver = true;
-        if (previewObj != null)
-            previewObj.SetActive(false);
-    }
-
-    GUIStyle scoreStyle,
-        overStyle,
-        smallStyle;
 
     void Awake()
     {
@@ -64,19 +57,22 @@ public class SuikaGame : MonoBehaviour
         }
         currentLevel = Random.Range(0, spawnableMaxLevel + 1);
         nextLevel = Random.Range(0, spawnableMaxLevel + 1);
+        highScore = PlayerPrefs.GetInt(HighScoreKey, 0);
         ShowPreview();
     }
 
     void Update()
     {
-        if (gameOver)
+        // ESC로 일시정지 토글 (게임오버가 아닐 때만)
+        if (!gameOver && Input.GetKeyDown(KeyCode.Escape))
+            TogglePause();
+
+        if (gameOver || paused)
             return;
 
-        // 다음 미리보기는 마지막 드롭 과일이 충분히 내려가야 등장
+        // 다음 미리보기는 마지막 드롭 과일이 무언가에 닿은 뒤 등장
         if (previewObj == null && IsReadyForNextPreview())
-        {
             ShowPreview();
-        }
 
         float mx = Camera.main.ScreenToWorldPoint(Input.mousePosition).x;
         mx = Mathf.Clamp(mx, minX, maxX);
@@ -97,8 +93,8 @@ public class SuikaGame : MonoBehaviour
     bool IsReadyForNextPreview()
     {
         if (lastDropped == null)
-            return true; // 파괴되었거나(머지됨) 처음 시작
-        return lastDropped.hasLanded; // 바닥/벽/다른 과일에 닿은 뒤에만 true
+            return true;
+        return lastDropped.hasLanded;
     }
 
     void DropFruit(float x)
@@ -107,7 +103,6 @@ public class SuikaGame : MonoBehaviour
         currentLevel = nextLevel;
         nextLevel = Random.Range(0, spawnableMaxLevel + 1);
 
-        // 미리보기 즉시 제거 — IsReadyForNextPreview()가 통과해야 새로 표시
         if (previewObj != null)
         {
             Destroy(previewObj);
@@ -149,112 +144,53 @@ public class SuikaGame : MonoBehaviour
             AudioSource.PlayClipAtPoint(data.mergeSfx, pos);
     }
 
-    void DrawNextFruitIcon()
+    public void TriggerGameOver()
     {
-        if (fruits == null || fruits.Length == 0)
+        if (gameOver)
             return;
-        var data = fruits[nextLevel];
-        if (data == null || data.sprite == null)
-            return;
+        gameOver = true;
+        Time.timeScale = 1f;
+        paused = false;
+        if (previewObj != null)
+            previewObj.SetActive(false);
 
-        // 우상단 카드 영역
-        float cardW = 110f,
-            cardH = 130f;
-        float cardX = Screen.width - cardW - 20f;
-        float cardY = 20f;
-        var cardRect = new Rect(cardX, cardY, cardW, cardH);
-
-        // 카드 배경 (반투명 흰색)
-        var prevColor = GUI.color;
-        GUI.color = new Color(1f, 1f, 1f, 0.85f);
-        GUI.Box(cardRect, GUIContent.none);
-        GUI.color = prevColor;
-
-        // "NEXT" 라벨
-        var labelStyle = new GUIStyle(GUI.skin.label)
+        // 최고 점수 갱신
+        if (score > highScore)
         {
-            fontSize = 18,
-            alignment = TextAnchor.UpperCenter,
-            fontStyle = FontStyle.Bold,
-        };
-        labelStyle.normal.textColor = new Color(0.4f, 0.3f, 0.2f);
-        GUI.Label(new Rect(cardX, cardY + 6f, cardW, 24f), "NEXT", labelStyle);
-
-        // 아이콘 그리기
-        var sprite = data.sprite;
-        var tex = sprite.texture;
-        // sprite의 textureRect (스프라이트가 텍스처의 일부일 수도 있음)
-        var rect = sprite.textureRect;
-        float texW = tex.width,
-            texH = tex.height;
-
-        // UV 영역 계산
-        var uv = new Rect(
-            rect.x / texW,
-            rect.y / texH,
-            rect.width / texW,
-            rect.height / texH
-        );
-
-        // 아이콘 영역 (카드 안쪽)
-        float iconSize = 80f;
-        float iconX = cardX + (cardW - iconSize) * 0.5f;
-        float iconY = cardY + 32f;
-        var iconRect = new Rect(iconX, iconY, iconSize, iconSize);
-
-        // 스프라이트 비율 유지 (정사각 가정)
-        GUI.color = data.tint;
-        GUI.DrawTextureWithTexCoords(iconRect, tex, uv);
-        GUI.color = prevColor;
+            highScore = score;
+            isNewRecord = true;
+            PlayerPrefs.SetInt(HighScoreKey, highScore);
+            PlayerPrefs.Save();
+        }
     }
 
-    void OnGUI()
+    public void TogglePause()
     {
-        if (scoreStyle == null)
-        {
-            scoreStyle = new GUIStyle(GUI.skin.label)
-            {
-                fontSize = 32,
-                alignment = TextAnchor.UpperCenter,
-            };
-            scoreStyle.normal.textColor = Color.black;
-            smallStyle = new GUIStyle(GUI.skin.label)
-            {
-                fontSize = 20,
-                alignment = TextAnchor.UpperRight,
-            };
-            smallStyle.normal.textColor = Color.black;
-            overStyle = new GUIStyle(GUI.skin.label)
-            {
-                fontSize = 72,
-                alignment = TextAnchor.MiddleCenter,
-                fontStyle = FontStyle.Bold,
-            };
-            overStyle.normal.textColor = Color.red;
-        }
+        paused = !paused;
+        Time.timeScale = paused ? 0f : 1f;
+    }
 
-        GUI.Label(new Rect(0, 10, Screen.width, 50), "Score: " + score, scoreStyle);
-        DrawNextFruitIcon();
+    public void RestartScene()
+    {
+        Time.timeScale = 1f;
+        UnityEngine.SceneManagement.SceneManager.LoadScene(
+            UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex
+        );
+    }
 
-        if (gameOver)
-        {
-            GUI.Box(new Rect(0, 0, Screen.width, Screen.height), GUIContent.none);
-            GUI.Label(
-                new Rect(0, Screen.height / 2 - 60, Screen.width, 120),
-                "GAME OVER",
-                overStyle
-            );
-            if (
-                GUI.Button(
-                    new Rect(Screen.width / 2 - 80, Screen.height / 2 + 40, 160, 50),
-                    "Restart"
-                )
-            )
-            {
-                UnityEngine.SceneManagement.SceneManager.LoadScene(
-                    UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex
-                );
-            }
-        }
+    public void QuitGame()
+    {
+        Time.timeScale = 1f;
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#else
+        Application.Quit();
+#endif
+    }
+
+    void OnDisable()
+    {
+        // 씬 전환/오브젝트 파괴 시 timeScale 복구
+        Time.timeScale = 1f;
     }
 }
