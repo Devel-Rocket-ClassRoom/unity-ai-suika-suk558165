@@ -1,0 +1,28 @@
+{
+    "asset": "9c46e9afbc6369a4b99ec98120580580",
+    "fileName": "019e1af9-78bb-7ceb-b3af-984e779c7fac.png",
+    "prompt": "front-view 3D container box, open top, viewer can see straight inside, cream beige yellow color, light interior bottom and back wall slightly visible, soft rounded corners, slight perspective showing inner depth from below, no top cover, flat 2D cartoon mobile game style, transparent background, tall rectangular shape proportioned 3 wide by 4 tall, clean minimal style for suika watermelon game",
+    "negativePrompt": "",
+    "model": "gemini-3.1-flash",
+    "modelName": "Gemini 3.1 Nano Banana 2",
+    "customSeed": -1,
+    "w3CTraceId": "",
+    "feedback": 0,
+    "refinementMode": "Generation",
+    "pixelateTargetSize": 0,
+    "pixelateKeepImageSize": false,
+    "pixelatePixelBlockSize": 0,
+    "pixelatePixelGridSize": 0,
+    "pixelateMode": 0,
+    "pixelateOutlineThickness": 0,
+    "doodles": {
+        "m_Items": []
+    },
+    "upscaleFactor": 0,
+    "dimensions": {
+        "width": 768,
+        "height": 1024
+    },
+    "spriteSheet": false,
+    "duration": 0.0
+}
