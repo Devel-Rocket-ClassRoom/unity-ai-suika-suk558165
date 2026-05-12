@@ -29,6 +29,20 @@ public class SuikaGame : MonoBehaviour
     public int nextLevel;
     public int score;
     public bool gameOver;
+    public bool paused;
+
+    [Header("UI - Pause (중앙 기준 px)")]
+    [Tooltip("PAUSED 글자 y 오프셋")]
+    public float pauseTitleOffsetY = -100f;
+
+    [Tooltip("일시정지 버튼 가로 크기")]
+    public Vector2 pauseButtonSize = new Vector2(180f, 50f);
+
+    [Tooltip("버튼 사이 간격")]
+    public float pauseButtonSpacing = 12f;
+
+    [Tooltip("첫 번째 버튼의 y 오프셋")]
+    public float pauseFirstButtonOffsetY = -10f;
 
     GameObject previewObj;
     float lastDropTime = -10f;
@@ -38,7 +52,21 @@ public class SuikaGame : MonoBehaviour
     {
         if (gameOver) return;
         gameOver = true;
+        Time.timeScale = 1f; // pause 중이었어도 정상화
+        paused = false;
         if (previewObj != null) previewObj.SetActive(false);
+    }
+
+    public void TogglePause()
+    {
+        paused = !paused;
+        Time.timeScale = paused ? 0f : 1f;
+    }
+
+    void OnDisable()
+    {
+        // 씬 전환/오브젝트 파괴 시 timeScale 복구
+        Time.timeScale = 1f;
     }
 
     GUIStyle scoreStyle,
@@ -65,7 +93,13 @@ public class SuikaGame : MonoBehaviour
 
     void Update()
     {
-        if (gameOver)
+        // ESC로 일시정지 토글 (게임오버가 아닐 때만)
+        if (!gameOver && Input.GetKeyDown(KeyCode.Escape))
+        {
+            TogglePause();
+        }
+
+        if (gameOver || paused)
             return;
 
         float mx = Camera.main.ScreenToWorldPoint(Input.mousePosition).x;
@@ -174,6 +208,61 @@ public class SuikaGame : MonoBehaviour
                     UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex
                 );
             }
+        }
+        else if (paused)
+        {
+            DrawPauseMenu();
+        }
+    }
+
+    void DrawPauseMenu()
+    {
+        float cx = Screen.width / 2f;
+        float cy = Screen.height / 2f;
+
+        // 반투명 어두운 배경
+        var prev = GUI.color;
+        GUI.color = new Color(0, 0, 0, 0.55f);
+        GUI.Box(new Rect(0, 0, Screen.width, Screen.height), GUIContent.none);
+        GUI.color = prev;
+
+        // "PAUSED" 타이틀
+        var titleStyle = new GUIStyle(GUI.skin.label)
+        {
+            fontSize = 64,
+            alignment = TextAnchor.MiddleCenter,
+            fontStyle = FontStyle.Bold,
+        };
+        titleStyle.normal.textColor = Color.white;
+        GUI.Label(new Rect(0, cy + pauseTitleOffsetY, Screen.width, 80), "PAUSED", titleStyle);
+
+        // 버튼 3개
+        float bw = pauseButtonSize.x;
+        float bh = pauseButtonSize.y;
+        float bx = cx - bw / 2f;
+        float by = cy + pauseFirstButtonOffsetY;
+
+        if (GUI.Button(new Rect(bx, by, bw, bh), "Resume"))
+        {
+            TogglePause();
+        }
+        by += bh + pauseButtonSpacing;
+        if (GUI.Button(new Rect(bx, by, bw, bh), "Restart"))
+        {
+            Time.timeScale = 1f;
+            UnityEngine.SceneManagement.SceneManager.LoadScene(
+                UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex
+            );
+        }
+        by += bh + pauseButtonSpacing;
+        if (GUI.Button(new Rect(bx, by, bw, bh), "Quit"))
+        {
+            Time.timeScale = 1f;
+            #if UNITY_EDITOR
+            UnityEditor.EditorApplication.isPlaying = false;
+            #else
+            Application.Quit();
+            #endif
         }
     }
 }
