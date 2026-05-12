@@ -28,18 +28,21 @@ public class DeadLine : MonoBehaviour
     void OnTriggerEnter2D(Collider2D other)
     {
         var f = other.GetComponent<Fruit>();
-        if (f != null) contacts.Add(f);
+        if (f != null)
+            contacts.Add(f);
     }
 
     void OnTriggerExit2D(Collider2D other)
     {
         var f = other.GetComponent<Fruit>();
-        if (f != null) contacts.Remove(f);
+        if (f != null)
+            contacts.Remove(f);
     }
 
     void Update()
     {
-        if (SuikaGame.Instance == null || SuikaGame.Instance.gameOver) return;
+        if (SuikaGame.Instance == null || SuikaGame.Instance.gameOver)
+            return;
 
         // 파괴된 과일 정리
         contacts.RemoveWhere(f => f == null);

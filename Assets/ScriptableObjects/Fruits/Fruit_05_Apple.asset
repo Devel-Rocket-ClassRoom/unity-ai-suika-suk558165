@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Fruit_05_Apple
   m_EditorClassIdentifier: Assembly-CSharp::FruitData
   level: 5
-  sprite: {fileID: 0}
+  sprite: {fileID: 21300000, guid: 8279c17de40d7d84086149b541702b41, type: 3}
   tint: {r: 1, g: 0.95, b: 0.4, a: 1}
   size: 1.4
   score: 60

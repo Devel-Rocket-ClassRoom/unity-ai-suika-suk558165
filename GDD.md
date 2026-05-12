@@ -7,7 +7,7 @@
 
 ### 1.2 장르 / 플랫폼
 - 장르: 2D 물리 머지 퍼즐 (Physics Merge Puzzle)
-- 플랫폼: PC (1차), 모바일 (2차 고려)
+- 플랫폼: pc
 - 엔진: Unity 6 (2D, Built-in Render Pipeline)
 
 ### 1.3 핵심 재미 (Core Loop)
@@ -125,9 +125,6 @@ Assets/Scripts/
 - [x] 마우스 입력 + 프리뷰
 - [x] 게임오버 라인 감지
 
-### ⏳ 진행 중
-- [ ] 씬에 카메라/벽/GameManager 배치 (MCP 연결 끊김으로 보류)
-
 ### ❌ 미구현 — 기본 범위 외
 아래는 GDD에 기록만, 사용자 요청대로 "기본만" 우선 완성 후 결정
 
@@ -152,14 +149,12 @@ Assets/Scripts/
 | 최고 점수 저장 | 높음 | PlayerPrefs로 베스트 점수 |
 | 일시정지 메뉴 | 중간 | ESC로 Pause + Resume/Restart |
 | 콤보 시스템 | 중간 | 짧은 시간 내 연속 머지 시 점수 배율 |
-| 특수 과일 (랜덤) | 낮음 | 폭탄 과일: 주변 정리 |
 | 난이도 모드 | 낮음 | 좁은 컨테이너 / 큰 시작 과일 |
 
 ### 5.3 기술
 | 항목 | 우선순위 | 설명 |
 |------|--------|------|
-| OnGUI → uGUI / TMP 교체 | 중간 | 폰트 품질 / 모바일 대응 |
-| 모바일 터치 입력 | 중간 | Touch.position 기반 처리 |
+
 | 사운드 매니저 | 중간 | 효과음 풀링, 볼륨 설정 |
 | Object Pooling | 낮음 | 과일 생성/파괴 빈도 많을 때 |
 | 세이브 시스템 | 낮음 | 진행 중 게임 저장/이어하기 |
@@ -203,12 +198,5 @@ Assets/Scripts/
 
 ### M3 — Release
 - 메인 메뉴, 설정, 튜토리얼
-- 모바일 빌드 (Android/iOS)
 - 콤보, 통계 시스템
 
----
-
-## 8. 참고 자료
-- 원작: 「スイカゲーム」 (Aladdin X, 2021)
-- 유사작: Suika Game, Watermelon Game, Fruit Merge
-- 물리 참고: Unity 2D Physics, Rigidbody2D, CircleCollider2D 공식 문서
