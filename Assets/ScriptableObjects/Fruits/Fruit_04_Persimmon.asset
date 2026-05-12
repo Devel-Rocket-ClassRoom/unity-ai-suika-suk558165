@@ -15,7 +15,7 @@ MonoBehaviour:
   level: 4
   sprite: {fileID: 21300000, guid: 050796c1445e45540a56b7b2108e0ea3, type: 3}
   tint: {r: 1, g: 1, b: 1, a: 1}
-  size: 1.15
+  size: 1.7
   colliderRadius: 0.34140626
   score: 50
   mergeSfx: {fileID: 0}
