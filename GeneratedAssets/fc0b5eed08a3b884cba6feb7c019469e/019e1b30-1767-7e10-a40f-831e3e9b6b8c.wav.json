@@ -1,0 +1,15 @@
+{
+    "asset": "fc0b5eed08a3b884cba6feb7c019469e",
+    "fileName": "019e1b30-1767-7e10-a40f-831e3e9b6b8c.wav",
+    "prompt": "satisfying low pop sound, game merge larger fruit, juicy plump thud",
+    "negativePrompt": "",
+    "model": "elevenlabs-sound-effects-v2",
+    "modelName": "ElevenLabs Sound Effects V2",
+    "customSeed": -1,
+    "w3CTraceId": "",
+    "feedback": 0,
+    "duration": 0.550000011920929,
+    "autoTrim": false,
+    "hasReference": false,
+    "voice": ""
+}

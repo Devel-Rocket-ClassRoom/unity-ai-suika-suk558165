@@ -1,0 +1,15 @@
+{
+    "asset": "d853f65cd1a4b714baa4c14d2c371b19",
+    "fileName": "019e1b2f-2424-7b83-90c4-05c2df7f29fb.wav",
+    "prompt": "cute mid-high pop sound, game ui merge, slightly squishy bubble",
+    "negativePrompt": "",
+    "model": "elevenlabs-sound-effects-v2",
+    "modelName": "ElevenLabs Sound Effects V2",
+    "customSeed": -1,
+    "w3CTraceId": "",
+    "feedback": 0,
+    "duration": 0.4000000059604645,
+    "autoTrim": false,
+    "hasReference": false,
+    "voice": ""
+}

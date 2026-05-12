@@ -1,0 +1,15 @@
+{
+    "asset": "719e95b5eb95f7442aaacbd9e1363e78",
+    "fileName": "019e1b2f-78e0-7579-aac8-4492612b7fca.wav",
+    "prompt": "cute medium pop sound for game merge, slightly lower pitch, soft",
+    "negativePrompt": "",
+    "model": "elevenlabs-sound-effects-v2",
+    "modelName": "ElevenLabs Sound Effects V2",
+    "customSeed": -1,
+    "w3CTraceId": "",
+    "feedback": 0,
+    "duration": 0.44999998807907107,
+    "autoTrim": false,
+    "hasReference": false,
+    "voice": ""
+}
