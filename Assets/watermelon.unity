@@ -1158,6 +1158,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1477419709}
   - component: {fileID: 1477419708}
+  - component: {fileID: 1477419710}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -1199,7 +1200,10 @@ MonoBehaviour:
   currentLevel: 0
   nextLevel: 0
   score: 0
+  highScore: 0
+  isNewRecord: 0
   gameOver: 0
+  paused: 0
 --- !u!4 &1477419709
 Transform:
   m_ObjectHideFlags: 0
@@ -1215,6 +1219,35 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1477419710
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1477419707}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a3dc60469d004d42a57094a22fe198c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SuikaUI
+  scoreY: 10
+  scoreFontSize: 32
+  bestY: 50
+  bestFontSize: 20
+  nextCardOffset: {x: 20, y: 20}
+  nextCardSize: {x: 110, y: 130}
+  nextIconSize: 80
+  nextLabelFontSize: 18
+  gameOverTitleOffsetY: -60
+  gameOverResultOffsetY: 10
+  restartButtonOffsetY: 60
+  restartButtonSize: {x: 160, y: 50}
+  newRecordOffsetY: -100
+  pauseTitleOffsetY: -100
+  pauseButtonSize: {x: 180, y: 50}
+  pauseButtonSpacing: 12
+  pauseFirstButtonOffsetY: -10
 --- !u!1 &1620220310
 GameObject:
   m_ObjectHideFlags: 0
