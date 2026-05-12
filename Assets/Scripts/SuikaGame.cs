@@ -34,9 +34,6 @@ public class SuikaGame : MonoBehaviour
     float lastDropTime = -10f;
     public float LastDropTime => lastDropTime;
 
-    [Header("Preview Timing")]
-    [Tooltip("드롭한 과일이 이 Y값 아래로 내려가야 다음 미리보기가 나타남")]
-    public float previewReadyY = 3.5f;
     Fruit lastDropped;
 
     public void TriggerGameOver()
@@ -100,8 +97,8 @@ public class SuikaGame : MonoBehaviour
     bool IsReadyForNextPreview()
     {
         if (lastDropped == null)
-            return true; // 파괴되었거나 처음 시작
-        return lastDropped.transform.position.y < previewReadyY;
+            return true; // 파괴되었거나(머지됨) 처음 시작
+        return lastDropped.hasLanded; // 바닥/벽/다른 과일에 닿은 뒤에만 true
     }
 
     void DropFruit(float x)
