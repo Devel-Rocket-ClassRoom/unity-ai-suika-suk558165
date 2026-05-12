@@ -28,7 +28,11 @@ public class SuikaGame : MonoBehaviour
     public int currentLevel;
     public int nextLevel;
     public int score;
+    public int highScore;
+    public bool isNewRecord;
     public bool gameOver;
+
+    const string HighScoreKey = "HighScore";
 
     GameObject previewObj;
     float lastDropTime = -10f;
@@ -43,6 +47,15 @@ public class SuikaGame : MonoBehaviour
         gameOver = true;
         if (previewObj != null)
             previewObj.SetActive(false);
+
+        // 최고 점수 갱신
+        if (score > highScore)
+        {
+            highScore = score;
+            isNewRecord = true;
+            PlayerPrefs.SetInt(HighScoreKey, highScore);
+            PlayerPrefs.Save();
+        }
     }
 
     GUIStyle scoreStyle,
@@ -64,6 +77,7 @@ public class SuikaGame : MonoBehaviour
         }
         currentLevel = Random.Range(0, spawnableMaxLevel + 1);
         nextLevel = Random.Range(0, spawnableMaxLevel + 1);
+        highScore = PlayerPrefs.GetInt(HighScoreKey, 0);
         ShowPreview();
     }
 
@@ -175,6 +189,11 @@ public class SuikaGame : MonoBehaviour
         }
 
         GUI.Label(new Rect(0, 10, Screen.width, 50), "Score: " + score, scoreStyle);
+
+        var bestStyle = new GUIStyle(smallStyle) { alignment = TextAnchor.UpperCenter };
+        bestStyle.normal.textColor = new Color(0.4f, 0.3f, 0.2f);
+        GUI.Label(new Rect(0, 50, Screen.width, 30), "Best: " + highScore, bestStyle);
+
         GUI.Label(new Rect(0, 10, Screen.width - 20, 50), "Next: lv" + (nextLevel + 1), smallStyle);
 
         if (gameOver)
@@ -185,6 +204,27 @@ public class SuikaGame : MonoBehaviour
                 "GAME OVER",
                 overStyle
             );
+            // 최종 점수 + 최고 점수
+            var resultStyle = new GUIStyle(scoreStyle);
+            resultStyle.normal.textColor = Color.white;
+            resultStyle.fontSize = 36;
+            GUI.Label(
+                new Rect(0, Screen.height / 2 + 10, Screen.width, 40),
+                "Score: " + score + "   Best: " + highScore,
+                resultStyle
+            );
+            if (isNewRecord)
+            {
+                var recordStyle = new GUIStyle(scoreStyle);
+                recordStyle.fontSize = 28;
+                recordStyle.fontStyle = FontStyle.Bold;
+                recordStyle.normal.textColor = new Color(1f, 0.85f, 0.2f);
+                GUI.Label(
+                    new Rect(0, Screen.height / 2 - 100, Screen.width, 30),
+                    "★ 신기록! ★",
+                    recordStyle
+                );
+            }
             if (
                 GUI.Button(
                     new Rect(Screen.width / 2 - 80, Screen.height / 2 + 40, 160, 50),
