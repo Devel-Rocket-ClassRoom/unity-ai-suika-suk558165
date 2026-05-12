@@ -1,0 +1,28 @@
+{
+    "asset": "91abe4d9e2fec874a8503914fd5abaa0",
+    "fileName": "019e1aea-86cb-7fb3-ab3c-7cfce7e122ba.jpg",
+    "prompt": "cute round strawberry fruit icon with kawaii face and seeds, glossy red-orange, casual cartoon style, transparent background, centered, single object",
+    "negativePrompt": "",
+    "model": "game-ui-essentials-2",
+    "modelName": "Game UI Essentials 2.0",
+    "customSeed": -1,
+    "w3CTraceId": "",
+    "feedback": 0,
+    "refinementMode": "Generation",
+    "pixelateTargetSize": 0,
+    "pixelateKeepImageSize": false,
+    "pixelatePixelBlockSize": 0,
+    "pixelatePixelGridSize": 0,
+    "pixelateMode": 0,
+    "pixelateOutlineThickness": 0,
+    "doodles": {
+        "m_Items": []
+    },
+    "upscaleFactor": 0,
+    "dimensions": {
+        "width": 2048,
+        "height": 2048
+    },
+    "spriteSheet": false,
+    "duration": 0.0
+}

@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Fruit_01_Strawberry
   m_EditorClassIdentifier: Assembly-CSharp::FruitData
   level: 1
-  sprite: {fileID: 21300000, guid: 8279c17de40d7d84086149b541702b41, type: 3}
-  tint: {r: 1, g: 0.55, b: 0.25, a: 1}
+  sprite: {fileID: 21300000, guid: 91abe4d9e2fec874a8503914fd5abaa0, type: 3}
+  tint: {r: 1, g: 1, b: 1, a: 1}
   size: 0.55
   score: 20
   mergeSfx: {fileID: 0}

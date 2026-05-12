@@ -1,0 +1,28 @@
+{
+    "asset": "b9eee28edb4866b4eb0cfb84e2524cab",
+    "fileName": "019e1aeb-6972-7e0a-9df6-48f0ea9b73bc.jpg",
+    "prompt": "cute round pineapple fruit icon with kawaii face and green leaf crown, glossy golden yellow, casual cartoon style, transparent background, centered, single object",
+    "negativePrompt": "",
+    "model": "game-ui-essentials-2",
+    "modelName": "Game UI Essentials 2.0",
+    "customSeed": -1,
+    "w3CTraceId": "",
+    "feedback": 0,
+    "refinementMode": "Generation",
+    "pixelateTargetSize": 0,
+    "pixelateKeepImageSize": false,
+    "pixelatePixelBlockSize": 0,
+    "pixelatePixelGridSize": 0,
+    "pixelateMode": 0,
+    "pixelateOutlineThickness": 0,
+    "doodles": {
+        "m_Items": []
+    },
+    "upscaleFactor": 0,
+    "dimensions": {
+        "width": 2048,
+        "height": 2048
+    },
+    "spriteSheet": false,
+    "duration": 0.0
+}

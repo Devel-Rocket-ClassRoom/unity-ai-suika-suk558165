@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Fruit_07_Peach
   m_EditorClassIdentifier: Assembly-CSharp::FruitData
   level: 7
-  sprite: {fileID: 21300000, guid: 8279c17de40d7d84086149b541702b41, type: 3}
-  tint: {r: 0.95, g: 0.7, b: 0.85, a: 1}
+  sprite: {fileID: 21300000, guid: b8ab34ad9d444e14caaaa3475d573b9a, type: 3}
+  tint: {r: 1, g: 1, b: 1, a: 1}
   size: 1.9
   score: 80
   mergeSfx: {fileID: 0}

@@ -1,0 +1,28 @@
+{
+    "asset": "d8c0f422f97636842b4f9252ef84818c",
+    "fileName": "019e1aeb-ded8-78bb-a484-49e9c8258d22.jpg",
+    "prompt": "cute round watermelon fruit icon with kawaii face, glossy dark green with stripes, casual cartoon style, transparent background, centered, single object",
+    "negativePrompt": "",
+    "model": "game-ui-essentials-2",
+    "modelName": "Game UI Essentials 2.0",
+    "customSeed": -1,
+    "w3CTraceId": "",
+    "feedback": 0,
+    "refinementMode": "Generation",
+    "pixelateTargetSize": 0,
+    "pixelateKeepImageSize": false,
+    "pixelatePixelBlockSize": 0,
+    "pixelatePixelGridSize": 0,
+    "pixelateMode": 0,
+    "pixelateOutlineThickness": 0,
+    "doodles": {
+        "m_Items": []
+    },
+    "upscaleFactor": 0,
+    "dimensions": {
+        "width": 2048,
+        "height": 2048
+    },
+    "spriteSheet": false,
+    "duration": 0.0
+}
