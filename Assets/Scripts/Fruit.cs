@@ -10,22 +10,30 @@ public class Fruit : MonoBehaviour
     public bool hasLanded; // 첫 충돌 시 true — 바닥/벽/다른 과일에 닿았음을 의미
 
     SpriteRenderer sr;
+    CircleCollider2D cc;
 
     void Awake()
     {
         sr = GetComponent<SpriteRenderer>();
+        cc = GetComponent<CircleCollider2D>();
     }
 
     public void Init(FruitData data)
     {
         if (sr == null)
             sr = GetComponent<SpriteRenderer>();
+        if (cc == null)
+            cc = GetComponent<CircleCollider2D>();
 
         level = data.level;
         if (data.sprite != null)
             sr.sprite = data.sprite;
         sr.color = data.tint;
         transform.localScale = new Vector3(data.size, data.size, 1f);
+
+        // 스프라이트의 실제 콘텐츠 크기에 맞게 콜라이더 반경 조정
+        if (cc != null)
+            cc.radius = data.colliderRadius;
     }
 
     void OnCollisionEnter2D(Collision2D col)
