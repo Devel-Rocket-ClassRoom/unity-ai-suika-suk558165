@@ -13,8 +13,9 @@ MonoBehaviour:
   m_Name: Fruit_09_Melon
   m_EditorClassIdentifier: Assembly-CSharp::FruitData
   level: 9
-  sprite: {fileID: 21300000, guid: 8279c17de40d7d84086149b541702b41, type: 3}
-  tint: {r: 0.55, g: 0.85, b: 0.3, a: 1}
-  size: 2.55
+  sprite: {fileID: 21300000, guid: baa9cd6d335df7244a8f3623e871ea09, type: 3}
+  tint: {r: 1, g: 1, b: 1, a: 1}
+  size: 3.2
+  colliderRadius: 0.32377928
   score: 100
   mergeSfx: {fileID: 0}

@@ -1,0 +1,28 @@
+{
+    "asset": "743f5a18c0aec6740bff0a2cc6bc91a7",
+    "fileName": "019e1aeb-3544-711f-85ed-58ff450c5810.jpg",
+    "prompt": "cute round asian pear fruit icon with kawaii face, glossy beige tan, casual cartoon style, transparent background, centered, single object",
+    "negativePrompt": "",
+    "model": "game-ui-essentials-2",
+    "modelName": "Game UI Essentials 2.0",
+    "customSeed": -1,
+    "w3CTraceId": "",
+    "feedback": 0,
+    "refinementMode": "Generation",
+    "pixelateTargetSize": 0,
+    "pixelateKeepImageSize": false,
+    "pixelatePixelBlockSize": 0,
+    "pixelatePixelGridSize": 0,
+    "pixelateMode": 0,
+    "pixelateOutlineThickness": 0,
+    "doodles": {
+        "m_Items": []
+    },
+    "upscaleFactor": 0,
+    "dimensions": {
+        "width": 2048,
+        "height": 2048
+    },
+    "spriteSheet": false,
+    "duration": 0.0
+}

@@ -1,0 +1,28 @@
+{
+    "asset": "b8ab34ad9d444e14caaaa3475d573b9a",
+    "fileName": "019e1aeb-4e27-7e80-aba6-f784a6d1a693.jpg",
+    "prompt": "cute round pink peach fruit icon with kawaii face, glossy pink, casual cartoon style, transparent background, centered, single object",
+    "negativePrompt": "",
+    "model": "game-ui-essentials-2",
+    "modelName": "Game UI Essentials 2.0",
+    "customSeed": -1,
+    "w3CTraceId": "",
+    "feedback": 0,
+    "refinementMode": "Generation",
+    "pixelateTargetSize": 0,
+    "pixelateKeepImageSize": false,
+    "pixelatePixelBlockSize": 0,
+    "pixelatePixelGridSize": 0,
+    "pixelateMode": 0,
+    "pixelateOutlineThickness": 0,
+    "doodles": {
+        "m_Items": []
+    },
+    "upscaleFactor": 0,
+    "dimensions": {
+        "width": 2048,
+        "height": 2048
+    },
+    "spriteSheet": false,
+    "duration": 0.0
+}

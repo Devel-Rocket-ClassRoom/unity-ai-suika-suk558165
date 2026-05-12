@@ -13,8 +13,9 @@ MonoBehaviour:
   m_Name: Fruit_08_Pineapple
   m_EditorClassIdentifier: Assembly-CSharp::FruitData
   level: 8
-  sprite: {fileID: 21300000, guid: 8279c17de40d7d84086149b541702b41, type: 3}
-  tint: {r: 1, g: 0.65, b: 0.1, a: 1}
-  size: 2.2
+  sprite: {fileID: 21300000, guid: b9eee28edb4866b4eb0cfb84e2524cab, type: 3}
+  tint: {r: 1, g: 1, b: 1, a: 1}
+  size: 2.9
+  colliderRadius: 0.23564453
   score: 90
   mergeSfx: {fileID: 0}
