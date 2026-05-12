@@ -160,7 +160,7 @@ public class SuikaUI : MonoBehaviour
             restartButtonSize.x,
             restartButtonSize.y
         );
-        if (GUI.Button(btnRect, "Restart"))
+        if (PrettyButton(btnRect, "↻  Restart", restartColor))
             game.RestartScene();
     }
 
