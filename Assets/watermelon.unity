@@ -766,7 +766,7 @@ Transform:
   m_GameObject: {fileID: 1165422141}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 3.05, z: -0.05}
+  m_LocalPosition: {x: 0, y: 3.05, z: 1}
   m_LocalScale: {x: 5.6, y: 0.05, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1204,6 +1204,7 @@ MonoBehaviour:
   bgmMuted: 0
   sfxVolume: 1
   bgmVolume: 1
+  isMouseOverUI: 0
   currentLevel: 0
   nextLevel: 0
   score: 0
@@ -1263,6 +1264,7 @@ MonoBehaviour:
   volumeOffset: {x: 6, y: 20}
   volumeSpacing: 10
   volumeUIScale: 0.8
+  volumePanelColor: {r: 1, g: 0.94, b: 0.96, a: 0.95}
 --- !u!1 &1608692198
 GameObject:
   m_ObjectHideFlags: 0
