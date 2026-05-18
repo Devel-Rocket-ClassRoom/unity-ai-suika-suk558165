@@ -42,7 +42,7 @@ public class Fruit : MonoBehaviour
 
         if (merged)
             return;
-        var other = col.gameObject.GetComponent<Fruit>();
+var other = col.gameObject.GetComponent<Fruit>();
         if (other == null || other.merged)
             return;
         if (other.level != level)

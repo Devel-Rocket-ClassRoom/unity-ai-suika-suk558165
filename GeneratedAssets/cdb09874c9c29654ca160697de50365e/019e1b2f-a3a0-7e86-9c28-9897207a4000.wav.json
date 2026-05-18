@@ -1,0 +1,15 @@
+{
+    "asset": "cdb09874c9c29654ca160697de50365e",
+    "fileName": "019e1b2f-a3a0-7e86-9c28-9897207a4000.wav",
+    "prompt": "satisfying medium pop sound, game merge plump fruit, balanced bubble",
+    "negativePrompt": "",
+    "model": "elevenlabs-sound-effects-v2",
+    "modelName": "ElevenLabs Sound Effects V2",
+    "customSeed": -1,
+    "w3CTraceId": "",
+    "feedback": 0,
+    "duration": 0.5,
+    "autoTrim": false,
+    "hasReference": false,
+    "voice": ""
+}

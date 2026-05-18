@@ -1,0 +1,15 @@
+{
+    "asset": "71804b654a6c6634ea26ddc75dca27bf",
+    "fileName": "019e1b30-7160-7c74-82b1-888ddf39c632.wav",
+    "prompt": "epic deep boom pop sound, watermelon merge victory, big juicy thud with sparkle",
+    "negativePrompt": "",
+    "model": "elevenlabs-sound-effects-v2",
+    "modelName": "ElevenLabs Sound Effects V2",
+    "customSeed": -1,
+    "w3CTraceId": "",
+    "feedback": 0,
+    "duration": 0.800000011920929,
+    "autoTrim": false,
+    "hasReference": false,
+    "voice": ""
+}

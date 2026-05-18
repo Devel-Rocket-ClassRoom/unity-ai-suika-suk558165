@@ -1,0 +1,15 @@
+{
+    "asset": "2f13255a6e201cf4d857c0c37009b178",
+    "fileName": "019e1b2f-c7ba-780f-8de9-8c67a7dfa0ef.wav",
+    "prompt": "satisfying medium-low pop sound, game merge larger fruit, rounded bubble",
+    "negativePrompt": "",
+    "model": "elevenlabs-sound-effects-v2",
+    "modelName": "ElevenLabs Sound Effects V2",
+    "customSeed": -1,
+    "w3CTraceId": "",
+    "feedback": 0,
+    "duration": 0.5,
+    "autoTrim": false,
+    "hasReference": false,
+    "voice": ""
+}

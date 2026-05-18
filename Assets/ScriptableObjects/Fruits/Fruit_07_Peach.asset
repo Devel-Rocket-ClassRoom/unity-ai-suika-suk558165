@@ -19,3 +19,4 @@ MonoBehaviour:
   colliderRadius: 0.3376953
   score: 80
   mergeSfx: {fileID: 0}
+  dropSfx: {fileID: 8300000, guid: 3329ace2791669947842d2e307ff3917, type: 3}

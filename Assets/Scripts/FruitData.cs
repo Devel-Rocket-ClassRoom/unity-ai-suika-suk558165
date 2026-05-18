@@ -23,4 +23,7 @@ public class FruitData : ScriptableObject
 
     [Tooltip("머지 시 재생할 효과음 (옵션)")]
     public AudioClip mergeSfx;
-}
+
+    [Tooltip("과일을 떨어뜨릴 때 재생할 효과음 (옵션)")]
+    public AudioClip dropSfx;
+    }

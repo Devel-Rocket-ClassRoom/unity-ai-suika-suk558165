@@ -1,0 +1,15 @@
+{
+    "asset": "5a6bef7b0421f2b4cac0ca923e838c92",
+    "fileName": "019e1b30-4b2f-73b4-9978-00ecd25edd90.wav",
+    "prompt": "deep satisfying pop sound, game merge big juicy fruit, heavy thump",
+    "negativePrompt": "",
+    "model": "elevenlabs-sound-effects-v2",
+    "modelName": "ElevenLabs Sound Effects V2",
+    "customSeed": -1,
+    "w3CTraceId": "",
+    "feedback": 0,
+    "duration": 0.6000000238418579,
+    "autoTrim": false,
+    "hasReference": false,
+    "voice": ""
+}

@@ -1,0 +1,28 @@
+{
+    "asset": "c9bbf8ef7ac35cd4fa2d3f9bf9f490ae",
+    "fileName": "019e1af8-2650-7050-a001-24e0bcfafdf4.png",
+    "prompt": "simple isometric 3D open wooden box container, cream yellow beige color, soft rounded edges, light interior bottom and back wall, slightly darker outer walls showing depth perspective, flat 2D cartoon style for mobile game, centered, transparent background, tall rectangular open-top crate, kawaii cute game UI asset",
+    "negativePrompt": "",
+    "model": "gemini-3.1-flash",
+    "modelName": "Gemini 3.1 Nano Banana 2",
+    "customSeed": -1,
+    "w3CTraceId": "",
+    "feedback": 0,
+    "refinementMode": "Generation",
+    "pixelateTargetSize": 0,
+    "pixelateKeepImageSize": false,
+    "pixelatePixelBlockSize": 0,
+    "pixelatePixelGridSize": 0,
+    "pixelateMode": 0,
+    "pixelateOutlineThickness": 0,
+    "doodles": {
+        "m_Items": []
+    },
+    "upscaleFactor": 0,
+    "dimensions": {
+        "width": 768,
+        "height": 1024
+    },
+    "spriteSheet": false,
+    "duration": 0.0
+}
